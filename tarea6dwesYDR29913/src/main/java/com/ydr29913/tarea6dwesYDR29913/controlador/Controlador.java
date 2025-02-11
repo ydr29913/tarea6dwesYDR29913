@@ -14,8 +14,15 @@ public class Controlador {
 	
 
 	//Controlador para ver la pagina del Index
-		@GetMapping({"/", "/mostrarIndex"})
-		public String mostrarIndex() {
-			return "index";
-		}
+	@GetMapping({"/", "/mostrarIndex"})
+	public String mostrarIndex() {
+		return "index";
+	}
+	
+	
+	//Controlador para ver la pagina del Login
+	@GetMapping("/mostrarLogin")
+	public String mostrarLogin() {
+		return "login";
+	}
 }
