@@ -122,4 +122,44 @@ public class Controlador {
         model.addAttribute("mensajeExito", "Persona registrada correctamente.");
         return "redirect:/mostrarMenuAdmin";
     }
+	
+	
+	//Metodo para insertar una nueva planta en la base de datos
+	@PostMapping("/insertarPlanta")
+	public String insertarPlanta(@RequestParam String codigo, @RequestParam String nombreComun, @RequestParam String nombreCientifico, Model model) {
+	    if (servplanta.existePlantaPorCodigo(codigo)) {
+	        model.addAttribute("error", "Ya existe una planta con ese código.");
+	        return "menu-admin";
+	    }
+	    
+	    Planta nuevaPlanta = new Planta();
+	    nuevaPlanta.setCodigo(codigo);
+	    nuevaPlanta.setNombreComun(nombreComun);
+	    nuevaPlanta.setNombreCientifico(nombreCientifico);
+	    servplanta.insertarPlanta(nuevaPlanta);
+	    
+	    model.addAttribute("mensajeExito", "Planta registrada correctamente.");
+	    return "redirect:/mostrarMenuAdmin";
+	}
+	
+	
+	//Metodo para modificar una planta de la base de datos
+	@PostMapping("/modificarPlanta")
+    public String modificarPlanta(@RequestParam String codigo, @RequestParam(required = false) String nuevoNombreComun, @RequestParam(required = false) String nuevoNombreCientifico, Model model) {
+        Planta planta = servplanta.obtenerPlantaPorCodigo(codigo);
+        if (planta == null) {
+            model.addAttribute("error", "No se encontró una planta con ese código.");
+            return "menu-admin";
+        }
+        if (nuevoNombreComun != null && !nuevoNombreComun.trim().isEmpty()) {
+            planta.setNombreComun(nuevoNombreComun);
+        }
+        if (nuevoNombreCientifico != null && !nuevoNombreCientifico.trim().isEmpty()) {
+            planta.setNombreCientifico(nuevoNombreCientifico);
+        }
+        
+        servplanta.modificarPlanta(planta);
+        model.addAttribute("mensajeExito", "Planta modificada correctamente.");
+        return "redirect:/mostrarMenuAdmin";
+    }
 }
