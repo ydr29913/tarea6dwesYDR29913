@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ydr29913.tarea6dwesYDR29913.modelo.Credenciales;
+import com.ydr29913.tarea6dwesYDR29913.modelo.Persona;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Planta;
 import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosCredenciales;
+import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosPersona;
 import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosPlanta;
 
 @Controller
@@ -23,7 +25,11 @@ public class Controlador {
 	@Autowired
 	private ServiciosCredenciales servcredenciales;
 	
+	@Autowired
+	private ServiciosPersona servpersona;
+	
 
+	
 	//Controlador para ver la pagina del Index
 	@GetMapping({"/", "/mostrarIndex"})
 	public String mostrarIndex() {
@@ -77,5 +83,43 @@ public class Controlador {
         List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
         model.addAttribute("plantas", plantas);
         return "menu-personal";
+    }
+	
+	
+	//Metodo para registrar una nueva persona con el perfil de "Personal"
+	@PostMapping("/registrarPersona")
+    public String registrarPersona(@RequestParam String nombre, @RequestParam String correo, @RequestParam String usuario, @RequestParam String contraseña, Model model) {
+        
+		//Metodo para validar el nombre
+		//...............................................................
+		
+		if (!servpersona.validarEmail(correo)) {
+            model.addAttribute("errorEmail", "El correo ya está registrado o es incorrecto.");
+            return "registrar-persona";
+        }
+        
+        if (!servcredenciales.validarUsuario(usuario)) {
+            model.addAttribute("errorUsuario", "El nombre de usuario no está disponible.");
+            return "registrar-persona";
+        }
+        
+        if (!servcredenciales.validarPassword(contraseña)) {
+            model.addAttribute("errorPassword", "La contraseña no es válida.");
+            return "registrar-persona";
+        }
+
+        Persona persona = new Persona();
+        persona.setNombre(nombre);
+        persona.setEmail(correo);
+        servpersona.insertarPersona(persona);
+
+        Credenciales credenciales = new Credenciales();
+        credenciales.setUsuario(usuario);
+        credenciales.setPassword(contraseña);
+        credenciales.setPerfil("Personal");
+        servcredenciales.insertarCredenciales(credenciales);
+
+        model.addAttribute("mensajeExito", "Persona registrada correctamente.");
+        return "redirect:/mostrarMenuAdmin";
     }
 }
