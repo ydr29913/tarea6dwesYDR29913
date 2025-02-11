@@ -8,4 +8,7 @@ import com.ydr29913.tarea6dwesYDR29913.modelo.Credenciales;
 @Repository
 public interface CredencialesRepository extends JpaRepository<Credenciales, Long>{
 
+	Credenciales findByUsuario(String usuario);
+	
+	Credenciales findByPassword(String password);
 }

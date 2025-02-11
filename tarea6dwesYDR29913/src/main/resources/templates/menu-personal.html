@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menú Personal</title>
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"> -->
+    
+    <link rel="stylesheet" href="../css/menu-personal.css">
+</head>
+<body>
+    <div id="navegacion">
+        <div id="navegacion-logo">
+            <img src="../imagenes/Logo.png" alt="Logo" width="90">
+        </div>
+        
+        <div id="navegacion-titulo">
+            <p>Menú Personal</p>
+        </div>
+
+        <ul id="navegacion-volver">
+            <li><a href="/mostrarIndex"><img src="../imagenes/volver.png" alt="Volver" width="50"></a></li>
+        </ul>
+    </div>
+
+    <div id="contenido">
+        <div id="contenido-titulo">
+            <h2>MENÚ PERSONAL</h2>
+        </div>
+    
+        <div id="contenido-texto">
+            <p>Bienvenido al menú de personal. Aquí puedes gestionar ejemplares, enviar mensajes y visualizar información sobre plantas.</p>
+        </div>
+    
+        <h3>Ver Plantas</h3>
+        <div id="contenido-plantas">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Nombre Común</th>
+                        <th>Nombre Científico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="planta : ${plantas}">
+                        <td th:text="${planta.id}"></td>
+                        <td th:text="${planta.codigo}"></td>
+                        <td th:text="${planta.nombreComun}"></td>
+                        <td th:text="${planta.nombreCientifico}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(plantas)}">
+                        <td colspan="4" class="text-center">No hay plantas registradas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/mostrarGestionEjemplares" id="menu-gestion-ejemplares">
+            <h2>Gestión de Ejemplares</h2>
+            <p>Accede al menú de gestión de ejemplares del vivero.</p>
+        </a>
+              
+        <a href="/mostrarGestionMensajes" id="menu-gestion-mensajes">
+            <h2>Gestión de Mensajes</h2>
+            <p>Accede al menú de gestión de mensajes del vivero.</p>
+        </a>
+    </div>
+    
+    
+    <script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

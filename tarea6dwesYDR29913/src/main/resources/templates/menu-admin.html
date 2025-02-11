@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu Admin</title>
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="../css/menu-admin.css" >
+</head>
+<body>
+    <div id="navegacion">
+        <div id="navegacion-logo">
+            <img src="../imagenes/Logo.png" alt="Logo" width="90">
+        </div>
+        
+        <div id="navegacion-titulo">
+            <p>Menu Administrador</p>
+        </div>
+
+        <ul id="navegacion-volver">
+            <li><a href="/mostrarIndex"><img src="../imagenes/volver.png" alt="Login" width="50"></a></li>
+        </ul>
+    </div>
+
+    <div id="contenido">
+        <div id="contenido-titulo">
+            <h2>MENU ADMIN</h2>
+        </div>
+    
+        <div id="contenido-texto">
+            <p>asdadadad sd asdasdasds asd asasdsdsd sdasdasd sdadaada sdaasdfasa</p>
+        </div>
+    
+        <h3>Ver Plantas</h3>
+        <div id="contenido-plantas">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Nombre Común</th>
+                        <th>Nombre Científico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="planta : ${plantas}">
+                        <td th:text="${planta.id}"></td>
+                        <td th:text="${planta.codigo}"></td>
+                        <td th:text="${planta.nombreComun}"></td>
+                        <td th:text="${planta.nombreCientifico}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(plantas)}">
+                        <td colspan="4" class="text-center">No hay plantas registradas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+		<div id="">
+			<form id="registrar-persona" th:action="@{/registrarPersona}" method="post">
+				<h2>Registrar Persona</h2>
+				
+				<label for="nombre">Nombre:</label> 
+				<input type="text" name="nombre" id="nombre" required>
+				
+				<label for="correo">Correo:</label>
+				<input type="email" name="correo" id="correo" placeholder="ejemplo@gmail.com" required>
+				
+				<label for="usuario">Usuario:</label>
+				<input type="text" name="usuario" id="usuario" required>
+				
+				<label for="contraseña">Contraseña:</label>
+				<input type="password" name="contraseña" id="contraseña" required>
+
+				<div id="form-botones">
+					<button type="submit">Registrar</button>
+					<button type="reset" id="reiniciar">Borrar</button>
+				</div>
+			</form>
+
+			<!-- Mostrar mensajes de error o éxito -->
+			<div th:if="${errorEmail != null}">
+				<p th:text="${errorEmail}" style="color: red;"></p>
+			</div>
+			<div th:if="${errorUsuario != null}">
+				<p th:text="${errorUsuario}" style="color: red;"></p>
+			</div>
+			<div th:if="${errorPassword != null}">
+				<p th:text="${errorPassword}" style="color: red;"></p>
+			</div>
+			<div th:if="${mensajeExito != null}">
+				<p th:text="${mensajeExito}" style="color: green;"></p>
+			</div>
+		</div>
+
+
+		<div id="insertar-planta">
+			<form th:action="@{/insertarPlanta}" method="post">
+				<h2>Insertar Planta</h2>
+
+				<label for="codigo">Código:</label>
+				<input type="text" name="codigo" id="codigo" required>
+				
+				<label for="nombreComun">Nombre Común:</label>
+				<input type="text" name="nombreComun" id="nombreComun" required>
+				
+				<label for="nombreCientifico">Nombre Científico:</label>
+				<input type="text" name="nombreCientifico" id="nombreCientifico" required>
+
+				<div id="form-botones">
+					<button type="submit">Insertar</button>
+					<button type="reset">Borrar</button>
+				</div>
+			</form>
+
+			<!-- Mostrar mensajes de error o éxito -->
+			<div th:if="${error != null}">
+				<p th:text="${error}" style="color: red;"></p>
+			</div>
+			<div th:if="${mensajeExito != null}">
+				<p th:text="${mensajeExito}" style="color: green;"></p>
+			</div>
+		</div>
+
+
+		<div id="modificar-planta">
+			<form action="/modificarPlanta" th:action="@{/modificarPlanta}" method="post">
+				<h2>Modificar Planta</h2>
+			
+				<label for="codigo">Código de la Planta:</label>
+				<input type="text" name="codigo" id="codigo" required>
+				
+				<label for="nuevoNombreComun">Nuevo Nombre Común:</label>
+				<input type="text" name="nuevoNombreComun" id="nuevoNombreComun">
+
+				<label for="nuevoNombreCientifico">Nuevo Nombre Científico:</label>
+				<input type="text" name="nuevoNombreCientifico" id="nuevoNombreCientifico">
+
+				<div id="form-botones">
+					<button type="submit">Modificar</button>
+					<button type="reset">Borrar</button>
+				</div>
+			</form>
+
+			<!-- Mostrar mensajes de error o éxito -->
+			<div th:if="${error != null}">
+				<p th:text="${error}" style="color: red;"></p>
+			</div>
+			<div th:if="${mensajeExito != null}">
+				<p th:text="${mensajeExito}" style="color: green;"></p>
+			</div>
+		</div>
+
+
+		<a href="/mostrarGestionEjemplares" id="menu-gestion-ejemplares">
+            <h2>Menu Gestion Ejemplares</h2>
+            <p>Esta opcion te permithe acceder al menu del admin del vivero</p>
+        </a>
+
+              
+        <a href="/mostrarGestionMensajes" id="menu-gestion-mensajes">
+            <h2>Menu Gestion Mensajes</h2>
+            <p>Esta opcion te permithe acceder al menu del personal del vivero</p>
+        </a>
+    </div>
+    
+    
+    <script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
