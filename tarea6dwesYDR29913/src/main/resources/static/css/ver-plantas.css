@@ -1,0 +1,120 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    /*background-color: #f8f7f7;*/
+    background-image: url(../imagenes/fondo-hojas-4.PNG);
+    margin: 0px;
+}
+
+
+/*Header*/
+#navegacion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+    
+    background-image: url(../imagenes/banner-patron-hojas.avif);
+    background-size: contain;
+    background-position: center;
+    height: 150px;
+    width: 100%;
+}
+
+#navegacion-titulo {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#navegacion-volver li {
+    display: block;
+}
+
+
+/*Main*/
+#contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-block: 80px;
+    padding: 80px;
+    width: 750px;
+    border-radius: 30px;
+    background-color: #dfdede;
+    border: 1px solid;
+}
+
+#contenido-titulo {
+    font-size: 28px;
+}
+
+#contenido-texto {
+    margin-bottom: 80px;
+}
+
+/*
+#contenido-plantas {
+    width: 700px;
+    height: 350px;
+    border-radius: 30px;
+    background-color: #f8f7f7;
+
+    border: 1px solid;
+}
+*/
+
+#contenido-plantas {
+    width: 700px;
+    height: auto; /* Hacemos que la altura se ajuste al contenido */
+    border-radius: 30px;
+    background-color: #f8f7f7;
+    border: 1px solid #d1d1d1;
+    padding: 20px;
+    overflow-x: auto; /* Permite el desplazamiento horizontal si la tabla es muy ancha */
+}
+
+/* Estilos de la tabla */
+#contenido-plantas table {
+    width: 100%;
+    border-collapse: collapse; /* Hace que las celdas estén más unidas */
+}
+
+#contenido-plantas th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#contenido-plantas th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+#contenido-plantas td {
+    background-color: #ffffff;
+}
+
+/* Añadir estilo cuando no hay plantas registradas */
+#contenido-plantas table .text-center {
+    color: #f44336; /* Rojo para advertir que no hay plantas */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Agregar hover a las filas para un mejor efecto visual */
+#contenido-plantas tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Agregar bordes redondeados a las celdas */
+#contenido-plantas td, th {
+    border-radius: 8px;
+}
