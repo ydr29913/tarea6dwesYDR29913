@@ -1,6 +1,7 @@
 package com.ydr29913.tarea6dwesYDR29913.servicios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,10 @@ public class ServiciosEjemplar {
 	
 	public List<Ejemplar> obtenerEjemplaresPorPlanta(Long plantaId) {
         return ejemplarrepo.findByPlantaId(plantaId);
+    }
+	
+	public Ejemplar obtenerEjemplarPorId(Long id) {
+        Optional<Ejemplar> ejemplar = ejemplarrepo.findById(id);
+        return ejemplar.orElse(null);
     }
 }

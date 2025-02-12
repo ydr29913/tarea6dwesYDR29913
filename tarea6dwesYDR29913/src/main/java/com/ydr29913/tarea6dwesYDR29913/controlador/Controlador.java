@@ -96,6 +96,7 @@ public class Controlador {
     }
 	
 	
+	
 	//Metodo para registrar una nueva persona con el perfil de "Personal"
 	@PostMapping("/registrarPersona")
     public String registrarPersona(@RequestParam String nombre, @RequestParam String correo, @RequestParam String usuario, @RequestParam String contraseña, Model model) {
@@ -132,6 +133,7 @@ public class Controlador {
         model.addAttribute("mensajeExito", "Persona registrada correctamente.");
         return "redirect:/mostrarMenuAdmin";
     }
+	
 	
 	
 	//Metodo para insertar una nueva planta en la base de datos
@@ -172,6 +174,7 @@ public class Controlador {
         model.addAttribute("mensajeExito", "Planta modificada correctamente.");
         return "redirect:/mostrarMenuAdmin";
     }
+	
 	
 	
 	//Metodo para ver la pagina de la gestion de ejemplares
@@ -224,4 +227,49 @@ public class Controlador {
         
         return "gestion-ejemplares";
     }
+	
+	
+	
+	//Metodo para mostrar la pagina de la gestion de los mensajes
+	@GetMapping("/mostrarGestionMensajes")
+	public String mostrarGestionMensajes(Model model) {
+		List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+	    model.addAttribute("ejemplares", ejemplares);
+		return "gestion-mensajes";
+	}
+	
+	//Metodo para registrar un mensaje en la base de datos
+	@PostMapping("/añadirMensaje")
+    public String añadirMensaje(@RequestParam Long ejemplarId, @RequestParam String mensaje, Model model) {
+        Ejemplar ejemplar = servejemplar.obtenerEjemplarPorId(ejemplarId);
+        
+        if (ejemplar == null) {
+            model.addAttribute("error", "El ejemplar seleccionado no existe.");
+            return "gestion-mensajes";
+        }
+
+        Mensaje nuevoMensaje = new Mensaje();
+        nuevoMensaje.setEjemplar(ejemplar);
+        nuevoMensaje.setMensaje(mensaje);
+        servmensaje.insertarMensaje(nuevoMensaje);
+
+        model.addAttribute("mensajeExito", "Mensaje añadido correctamente.");
+        return "redirect:/mostrarGestionMensajes";
+    }
+	
+	//Metodo para filtrar los mensajes de el ejemplar seleccionado
+	@PostMapping("/filtrarMensajes")
+	public String filtrarMensajes(@RequestParam Long idEjemplar, Model model) {
+		Ejemplar ejemplar = servejemplar.obtenerEjemplarPorId(idEjemplar);
+		if (ejemplar == null) {
+		    model.addAttribute("error", "Ejemplar no encontrado.");
+		    return "gestion-mensajes";
+		}
+	    
+	    List<Mensaje> mensajes = servmensaje.obtenerMensajesPorEjemplar(ejemplar);
+	    
+	    model.addAttribute("mensajes", mensajes);
+	    model.addAttribute("ejemplar", ejemplar);
+	    return "redirect:/mostrarGestionMensajes";
+	}
 }
