@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ydr29913.tarea6dwesYDR29913.modelo.Credenciales;
+import com.ydr29913.tarea6dwesYDR29913.modelo.Ejemplar;
+import com.ydr29913.tarea6dwesYDR29913.modelo.Mensaje;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Persona;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Planta;
 import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosCredenciales;
+import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosEjemplar;
+import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosMensaje;
 import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosPersona;
 import com.ydr29913.tarea6dwesYDR29913.servicios.ServiciosPlanta;
 
@@ -27,6 +31,12 @@ public class Controlador {
 	
 	@Autowired
 	private ServiciosPersona servpersona;
+	
+	@Autowired
+	private ServiciosEjemplar servejemplar;
+	
+	@Autowired
+	private ServiciosMensaje servmensaje;
 	
 
 	
@@ -161,5 +171,57 @@ public class Controlador {
         servplanta.modificarPlanta(planta);
         model.addAttribute("mensajeExito", "Planta modificada correctamente.");
         return "redirect:/mostrarMenuAdmin";
+    }
+	
+	
+	//Metodo para ver la pagina de la gestion de ejemplares
+	@GetMapping("/mostrarGestionEjemplares")
+    public String mostrarGestionEjemplares(Model model) {
+        List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+        List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+        List<Mensaje> mensajes = servmensaje.obtenerTodosLosMensajes();
+        
+        model.addAttribute("plantas", plantas);
+        model.addAttribute("ejemplares", ejemplares);
+        model.addAttribute("mensajes", mensajes);
+        
+        return "gestion-ejemplares";
+    }
+	
+	//Metodo para registrar un nuevo ejemplar en la base de datos
+	@PostMapping("/insertarEjemplar")
+    public String insertarEjemplar(@RequestParam Long id, @RequestParam String nombre, @RequestParam String mensaje, Model model) {
+        Planta planta = servplanta.obtenerPlantaPorId(id);
+        if (planta == null) {
+            model.addAttribute("error", "Planta no encontrada.");
+            return "gestion-ejemplares";
+        }
+        
+        Ejemplar ejemplar = new Ejemplar();
+        ejemplar.setNombre(nombre);
+        ejemplar.setPlanta(planta);
+        servejemplar.insertarEjemplar(ejemplar);
+        
+        Mensaje nuevoMensaje = new Mensaje();
+        nuevoMensaje.setEjemplar(ejemplar);
+        nuevoMensaje.setMensaje("Ejemplar registrado con mensaje: " + mensaje);
+        servmensaje.insertarMensaje(nuevoMensaje);
+        
+        model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
+        return "redirect:/mostrarGestionEjemplares";
+    }
+	
+	//Metodo para filtrar los ejemplares registrados en la base de datos
+	@PostMapping("/filtrarEjemplares")
+    public String filtrarEjemplares(@RequestParam Long plantaId, Model model) {
+        List<Ejemplar> ejemplares = servejemplar.obtenerEjemplaresPorPlanta(plantaId);
+        List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+        List<Mensaje> mensajes = servmensaje.obtenerMensajesPorPlanta(plantaId);
+        
+        model.addAttribute("plantas", plantas);
+        model.addAttribute("ejemplares", ejemplares);
+        model.addAttribute("mensajes", mensajes);
+        
+        return "gestion-ejemplares";
     }
 }

@@ -12,6 +12,8 @@ import com.ydr29913.tarea6dwesYDR29913.modelo.Planta;
 @Repository
 public interface PlantaRepository extends JpaRepository<Planta, Long> {
 	
+	Optional<Planta> findById(Long id);
+	
 	Optional<Planta> findByCodigo(String codigo);
 	
 	List<Planta> findAllByOrderByNombreComunAsc();

@@ -36,4 +36,9 @@ public class ServiciosPlanta {
         Optional<Planta> planta = plantarepo.findByCodigo(codigo);
         return planta.orElse(null);
     }
+	
+	public Planta obtenerPlantaPorId(Long id) {
+        Optional<Planta> planta = plantarepo.findById(id);
+        return planta.orElse(null);
+    }
 }
