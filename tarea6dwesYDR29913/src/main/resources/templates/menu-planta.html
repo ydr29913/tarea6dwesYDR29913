@@ -23,9 +23,9 @@
         </ul>
     </div>
 
-    <div id="contenido">
+    <div id="">
 		<div id="insertar-planta">
-			<form th:action="@{/insertarPlanta}" method="post">
+			<form id="opciones" th:action="@{/insertarPlanta}" method="post">
 				<h2>Insertar Planta</h2>
 
 				<label for="codigo">Código:</label>
@@ -54,7 +54,7 @@
 
 
 		<div id="modificar-planta">
-			<form action="/modificarPlanta" th:action="@{/modificarPlanta}" method="post">
+			<form id="opciones" action="/modificarPlanta" th:action="@{/modificarPlanta}" method="post">
 				<h2>Modificar Planta</h2>
 			
 				<label for="codigo">Código de la Planta:</label>

@@ -37,18 +37,8 @@ body {
 
 
 /*Main*/
-#contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    margin-block: 80px;
-    padding: 80px;
-    width: 750px;
-    border-radius: 30px;
-    background-color: #dfdede;
-    border: 1px solid;
+#opciones {
+	margin-block: 80px;
 }
 
 #contenido-titulo {
@@ -62,151 +52,6 @@ body {
 #contenido h3 {
     font-size: 25px;
     color: #333;
-}
-
-#contenido-plantas {
-    width: 700px;
-    height: 350px;
-    border-radius: 30px;
-    background-color: #f8f7f7;
-
-    border: 1px solid;
-}
-
-
-/*Registrar Persona*/
-#registrar-persona {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    background-color: #f8f7f7;
-    padding: 15px;
-    padding-inline: 30px;
-    border-radius: 30px;
-    margin-block: 80px;
-    width: 650px;
-    height: 500px;
-    border: 1px solid;
-}
-
-#registrar-persona h2 {
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    margin-bottom: 60px;
-}
-
-label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input {
-    width: 95%;
-    padding: 7px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid grey;
-}
-
-button {
-    width: 49%;
-    padding: 10px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-button[type="submit"] {
-    background-color: green;
-    color: white;
-}
-
-button[type="reset"] {
-    background-color: red;
-    color: white;
-}
-
-button:hover {
-    opacity: 0.7;
-}
-
-
-/*Insertar Planta*/
-#insertar-planta {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    background-color: #f8f7f7;
-    padding: 15px;
-    padding-inline: 30px;
-    border-radius: 30px;
-    margin-bottom: 80px;
-    width: 650px;
-    height: 430px;
-    border: 1px solid;
-}
-
-#insertar-planta h2 {
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    margin-bottom: 60px;
-}
-
-
-/*Modificar Planta */
-#modificar-planta {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    background-color: #f8f7f7;
-    padding: 15px;
-    padding-inline: 30px;
-    border-radius: 30px;
-    margin-bottom: 80px;
-    width: 650px;
-    height: 430px;
-    border: 1px solid;
-}
-
-#modificar-planta h2 {
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    margin-bottom: 60px;
-}
-
-#modificar-planta input {
-    width: 95%;
-    padding: 7px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid grey;
-}
-
-#modificar-planta label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#modificar-planta select {
-    width: 100%;
-    padding: 7px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid grey;
 }
 
 
@@ -223,6 +68,7 @@ button:hover {
     background-color: #f8f7f7;
     
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 #menu-gestion-ejemplares {

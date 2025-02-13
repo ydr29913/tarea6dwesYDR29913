@@ -36,17 +36,22 @@ body {
 
 
 /*Main*/
-#contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    margin-block: 80px;
-    padding: 80px;
-    width: 750px;
+#contenido-plantas {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	
+	width: 700px;
+    height: auto;
     border-radius: 30px;
+    background-color: #f8f7f7;
+    border: 1px solid #d1d1d1;
+    padding: 20px;
+	margin-block: 80px;
+    overflow-x: auto;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
 }
 
 #contenido-titulo {
@@ -55,16 +60,6 @@ body {
 
 #contenido-texto {
     margin-bottom: 80px;
-}
-
-#contenido-plantas {
-    width: 700px;
-    height: auto;
-    border-radius: 30px;
-    background-color: #f8f7f7;
-    border: 1px solid #d1d1d1;
-    padding: 20px;
-    overflow-x: auto;
 }
 
 /* Estilos de la tabla */

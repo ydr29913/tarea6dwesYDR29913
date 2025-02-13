@@ -24,16 +24,8 @@
     </div>
 
 	
-    <div id="contenido">
-   		<div id="contenido-titulo">
-            <h2>GESTION EJEMPLARES</h2>
-        </div>
-    
-        <div id="contenido-texto">
-            <p>asdadadad sd asdasdasds asd asasdsdsd sdasdasd sdadaada sdaasdfasa</p>
-        </div>
-
-		<form id="registrar-ejemplar" action="/insertarEjemplar" th:action="@{/insertarEjemplar}" method="post">
+    <div id="opciones">
+   		<form id="registrar-ejemplar" action="/insertarEjemplar" th:action="@{/insertarEjemplar}" method="post">
 		   	<h2>Registrar Ejemplar</h2>
 			
 			<label for="planta">Selecciona una Planta:</label>
@@ -96,7 +88,7 @@
             	<p>Esta opcion te permite ver los mensajes de seguimiento</p>
         	</a>
     	</div>
-    
+    </div>
     
     <script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>

@@ -37,7 +37,7 @@ body {
 
 
 /*Main*/
-#contenido-plantas {
+#opciones {
 	display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,41 +52,43 @@ body {
     background-color: #f8f7f7;
     
     border: 1px solid black;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
+	
 }
 
 
 /* Estilos de la tabla */
-#contenido-plantas table {
+#opciones table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#contenido-plantas th, td {
+#opciones th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-#contenido-plantas th {
+#opciones th {
     background-color: #4CAF50;
     color: white;
     font-weight: bold;
 }
 
-#contenido-plantas td {
+#opciones td {
     background-color: #ffffff;
 }
 
-#contenido-plantas tr:hover {
+#opciones tr:hover {
     background-color: #f1f1f1;
 }
 
-#contenido-plantas td, th {
+#opciones td, th {
     border-radius: 8px;
 }
 
 /* Añadir estilo cuando no hay plantas registradas */
-#contenido-plantas table .text-center {
+#opciones table .text-center {
     color: #f44336;
     font-size: 18px;
     font-weight: bold;

@@ -37,7 +37,7 @@ body {
 
 
 /*Main*/
-#contenido {
+.contenido {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,8 +47,9 @@ body {
     padding: 80px;
     width: 750px;
     border-radius: 30px;
-    background-color: #dfdede;
+    background-color: #ffffff;
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
 }
 
 #contenido-titulo {
@@ -60,6 +61,7 @@ body {
 
 #contenido-imagen {
     margin-bottom: 58px;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 .contenido-flip3D {
@@ -102,6 +104,9 @@ body {
     height: 200px;
     margin: 20px auto;
     perspective: 1000px;
+	border-radius: 25px;
+	
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 .flip3D > .front, .flip3D > .back {

@@ -36,32 +36,8 @@ body {
 }
 
 
-/*Main*/
-#contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    margin-block: 80px;
-    padding: 80px;
-    width: 750px;
-    border-radius: 30px;
-    background-color: #dfdede;
-    border: 1px solid;
-}
-
-#contenido-titulo {
-    font-size: 28px;
-}
-
-#contenido-texto {
-    margin-bottom: 80px;
-}
-
-
 /*Añadir Mensaje*/
-#añadir-mensaje {
+#opciones {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,14 +46,15 @@ body {
     padding: 15px;
     padding-inline: 30px;
     border-radius: 30px;
-    margin-top: 20px;
+    margin-top: 80px;
     margin-bottom: 80px;
     width: 650px;
     height: 370px;
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
 }
 
-#añadir-mensaje h2 {
+#opciones h2 {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
@@ -147,7 +124,9 @@ button:hover {
     border-radius: 30px;
     width: 650px;
     height: 500px;
+	margin-bottom: 100px;
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
 }
 
 #filtrar-mensajes h2 {

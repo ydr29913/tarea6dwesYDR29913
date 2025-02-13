@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ydr29913</groupId>
-	<artifactId>tarea6dwesYDR29913</artifactId>
+	<artifactId>tarea6dwesYDR29913-final</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tarea6dwesYDR29913</name>
+	<name>tarea6dwesYDR29913-final</name>
 	<description>Realizacion de la Tarea 6 (Dani Gayol)</description>
 	<url/>
 	<licenses>

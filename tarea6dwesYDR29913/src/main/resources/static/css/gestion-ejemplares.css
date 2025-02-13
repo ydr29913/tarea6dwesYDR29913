@@ -37,19 +37,18 @@ body {
 
 
 /*Main*/
-#contenido {
+#opciones {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    margin-block: 80px;
+    margin-block: 20px;
     padding: 80px;
     width: 750px;
     border-radius: 30px;
-    background-color: #dfdede;
-    border: 1px solid;
 }
+
 
 #contenido-titulo {
     font-size: 28px;
@@ -89,6 +88,7 @@ body {
     width: 650px;
     height: 420px;
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 #registrar-ejemplar h2 {
@@ -159,6 +159,7 @@ button:hover {
     width: 650px;
     height: 500px;
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 #filtrar-ejemplares h2 {
@@ -239,6 +240,7 @@ button:hover {
     background-color: #f8f7f7;
     
     border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
 }
 
 #menu-gestion-ejemplares {
