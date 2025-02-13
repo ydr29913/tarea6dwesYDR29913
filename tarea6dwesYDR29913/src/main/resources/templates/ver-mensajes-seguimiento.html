@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Plantas</title>
+    <title>Ver Mensajes Seguimiento</title>
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"> -->
     
-    <link rel="stylesheet" th:href="@{/css/ver-plantas.css}">
+    <link rel="stylesheet" th:href="@{/css/ver-mensajes-seguimiento.css}">
 </head>
 <body>
     <div id="navegacion">
@@ -14,7 +14,7 @@
             <img th:src="@{/imagenes/Logo.png}" alt="Logo" width="90">
         </div>
         <div id="navegacion-titulo">
-            <p>Ver Plantas</p>
+            <p>Ver Mensajes Seguimiento</p>
         </div>
         <ul id="navegacion-volver">
             <li><a th:href="@{/mostrarIndex}"><img th:src="@{/imagenes/volver.png}" alt="Volver" width="50"></a></li>
@@ -23,26 +23,22 @@
 
     <div id="contenido">
         <div id="contenido-plantas">
-        	<h2>VER PLANTAS</h2>
-        
+        	<h2>VER MENSAJES SEGUIMIENTO</h2>
+        	
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Código</th>
-                        <th>Nombre Común</th>
-                        <th>Nombre Científico</th>
+                        <th>Id</th>
+                        <th>Mensaje</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="planta : ${plantas}">
-                        <td th:text="${planta.id}"></td>
-                        <td th:text="${planta.codigo}"></td>
-                        <td th:text="${planta.nombreComun}"></td>
-                        <td th:text="${planta.nombreCientifico}"></td>
+                    <tr th:each="mensaje : ${mensajes}">
+                        <td th:text="${mensaje.id}"></td>
+                        <td th:text="${mensaje.mensaje}"></td>
                     </tr>
-                    <tr th:if="${#lists.isEmpty(plantas)}">
-                        <td colspan="4" class="text-center">No hay plantas registradas</td>
+                    <tr th:if="${#lists.isEmpty(mensajes)}">
+                        <td colspan="2" class="text-center">No hay Mensajes registradas</td>
                     </tr>
                 </tbody>
             </table>

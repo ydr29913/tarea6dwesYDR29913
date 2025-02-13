@@ -32,30 +32,10 @@
             <p>Bienvenido al menú de personal. Aquí puedes gestionar ejemplares, enviar mensajes y visualizar información sobre plantas.</p>
         </div>
     
-        <h3>Ver Plantas</h3>
-        <div id="contenido-plantas">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Código</th>
-                        <th>Nombre Común</th>
-                        <th>Nombre Científico</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="planta : ${plantas}">
-                        <td th:text="${planta.id}"></td>
-                        <td th:text="${planta.codigo}"></td>
-                        <td th:text="${planta.nombreComun}"></td>
-                        <td th:text="${planta.nombreCientifico}"></td>
-                    </tr>
-                    <tr th:if="${#lists.isEmpty(plantas)}">
-                        <td colspan="4" class="text-center">No hay plantas registradas</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    	<a href="/mostrarVerPlantas" id="menu-gestion-ejemplares">
+            <h2>Ver Plantas</h2>
+            <p>Esta opcion te permite ver las plantas del vivero</p>
+        </a>
 
         <a href="/mostrarGestionEjemplares" id="menu-gestion-ejemplares">
             <h2>Gestión de Ejemplares</h2>

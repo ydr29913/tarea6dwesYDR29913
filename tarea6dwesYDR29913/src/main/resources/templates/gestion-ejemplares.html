@@ -90,26 +90,12 @@
 			</div>
         </form>
 
-		<h3>Mensajes de Seguimiento</h3>
-		<div id="mensaje-seguimiento">
-			<table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Mensaje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="mensaje : ${mensajes}">
-                        <td th:text="${mensaje.id}"></td>
-                        <td th:text="${mensaje.mensaje}"></td>
-                    </tr>
-                    <tr th:if="${#lists.isEmpty(mensajes)}">
-                        <td colspan="2" class="text-center">No hay Mensajes registradas</td>
-                    </tr>
-                </tbody>
-            </table>
-		</div>
+		<div id="">
+    		<a href="/mostrarMenuMensajesSeguimiento" id="menu-mensajes-seguimiento">
+            	<h2>Menu Mensajes Seguimiento</h2>
+            	<p>Esta opcion te permite ver los mensajes de seguimiento</p>
+        	</a>
+    	</div>
     
     
     <script src="/webjars/jquery/jquery.min.js"></script>

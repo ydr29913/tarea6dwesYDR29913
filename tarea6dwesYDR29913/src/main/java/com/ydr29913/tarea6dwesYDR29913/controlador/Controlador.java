@@ -97,6 +97,14 @@ public class Controlador {
 	
 	
 	
+	//Metodo para ver la pagina del menu de las personas
+	@GetMapping("/mostrarMenuPersona")
+    public String mostrarMenuPersona(Model model) {
+        List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+        model.addAttribute("plantas", plantas);
+        return "menu-persona";
+    }
+	
 	//Metodo para registrar una nueva persona con el perfil de "Personal"
 	@PostMapping("/registrarPersona")
     public String registrarPersona(@RequestParam String nombre, @RequestParam String correo, @RequestParam String usuario, @RequestParam String contraseña, Model model) {
@@ -135,6 +143,14 @@ public class Controlador {
     }
 	
 	
+	
+	//Metodo para  ver la pagina del menu de las plantas
+	@GetMapping("/mostrarMenuPlanta")
+    public String mostrarMenuPlanta(Model model) {
+        List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+        model.addAttribute("plantas", plantas);
+        return "menu-planta";
+    }
 	
 	//Metodo para insertar una nueva planta en la base de datos
 	@PostMapping("/insertarPlanta")
@@ -226,6 +242,20 @@ public class Controlador {
         model.addAttribute("mensajes", mensajes);
         
         return "gestion-ejemplares";
+    }
+	
+	//Metodo para mostrar la pagina de los mensajes de seguimiento
+	@GetMapping("/mostrarMenuMensajesSeguimiento")
+    public String mostrarMenuMensajesSeguimiento(Model model) {
+		List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+        List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+        List<Mensaje> mensajes = servmensaje.obtenerTodosLosMensajes();
+        
+        model.addAttribute("plantas", plantas);
+        model.addAttribute("ejemplares", ejemplares);
+        model.addAttribute("mensajes", mensajes);
+        
+        return "ver-mensajes-seguimiento";
     }
 	
 	
