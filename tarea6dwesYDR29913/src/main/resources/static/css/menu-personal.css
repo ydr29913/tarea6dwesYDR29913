@@ -42,6 +42,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     margin-block: 80px;
     padding: 80px;
@@ -57,6 +58,7 @@ body {
 
 #contenido-texto {
     margin-bottom: 80px;
+    text-align: center;
 }
 
 #contenido h3 {
@@ -91,7 +93,6 @@ body {
 }
 
 #menu-gestion-ejemplares {
-    margin-top: 80px;
     margin-bottom: 50px;
 }
 

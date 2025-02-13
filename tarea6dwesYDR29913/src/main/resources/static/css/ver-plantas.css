@@ -5,7 +5,6 @@ body {
     justify-content: center;
     
     font-family: Arial, Helvetica, sans-serif;
-    /*background-color: #f8f7f7;*/
     background-image: url(../imagenes/fondo-hojas-4.PNG);
     margin: 0px;
 }
@@ -42,13 +41,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     margin-block: 80px;
     padding: 80px;
     width: 750px;
     border-radius: 30px;
-    background-color: #dfdede;
-    border: 1px solid;
 }
 
 #contenido-titulo {
@@ -59,31 +57,20 @@ body {
     margin-bottom: 80px;
 }
 
-/*
 #contenido-plantas {
     width: 700px;
-    height: 350px;
-    border-radius: 30px;
-    background-color: #f8f7f7;
-
-    border: 1px solid;
-}
-*/
-
-#contenido-plantas {
-    width: 700px;
-    height: auto; /* Hacemos que la altura se ajuste al contenido */
+    height: auto;
     border-radius: 30px;
     background-color: #f8f7f7;
     border: 1px solid #d1d1d1;
     padding: 20px;
-    overflow-x: auto; /* Permite el desplazamiento horizontal si la tabla es muy ancha */
+    overflow-x: auto;
 }
 
 /* Estilos de la tabla */
 #contenido-plantas table {
     width: 100%;
-    border-collapse: collapse; /* Hace que las celdas estén más unidas */
+    border-collapse: collapse;
 }
 
 #contenido-plantas th, td {
@@ -102,19 +89,17 @@ body {
     background-color: #ffffff;
 }
 
-/* Añadir estilo cuando no hay plantas registradas */
-#contenido-plantas table .text-center {
-    color: #f44336; /* Rojo para advertir que no hay plantas */
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Agregar hover a las filas para un mejor efecto visual */
 #contenido-plantas tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Agregar bordes redondeados a las celdas */
 #contenido-plantas td, th {
     border-radius: 8px;
+}
+
+/* Añadir estilo cuando no hay plantas registradas */
+#contenido-plantas table .text-center {
+    color: #f44336;
+    font-size: 18px;
+    font-weight: bold;
 }

@@ -96,7 +96,6 @@ public class Controlador {
     }
 	
 	
-	
 	//Metodo para ver la pagina del menu de las personas
 	@GetMapping("/mostrarMenuPersona")
     public String mostrarMenuPersona(Model model) {
@@ -109,8 +108,10 @@ public class Controlador {
 	@PostMapping("/registrarPersona")
     public String registrarPersona(@RequestParam String nombre, @RequestParam String correo, @RequestParam String usuario, @RequestParam String contraseña, Model model) {
         
-		//Metodo para validar el nombre
-		//...............................................................
+		if (!servpersona.validarNombre(nombre)) {
+            model.addAttribute("errorNombre", "El nombre ya está registrado o es incorrecto.");
+            return "registrar-persona";
+        }
 		
 		if (!servpersona.validarEmail(correo)) {
             model.addAttribute("errorEmail", "El correo ya está registrado o es incorrecto.");

@@ -20,12 +20,29 @@ public class ServiciosPersona {
 		personarepo.saveAndFlush(persona);
 	}
 	
+	//Sirve para validar que el nombre esta introducido correctamente
+	public boolean validarNombre(String nombre) {
+        String regex = "^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nombre);
+        
+        if (!matcher.matches() || nombre.length() < 1 || nombre.length() > 50) {
+            return false;
+        }
+
+        return personarepo.findByNombre(nombre).isEmpty();
+    }
+	
 	//Sirve para validar que el email esta introducido correctamente
 	public boolean validarEmail(String email) {
-	    String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-	    Pattern pattern = Pattern.compile(regex);
-	    Matcher matcher = pattern.matcher(email);
-	    
-	    return matcher.matches() && personarepo.findByEmail(email).isEmpty();
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (!matcher.matches() || email.isEmpty()) {
+            return false;
+        }
+
+        return personarepo.findByEmail(email).isEmpty();
 	}
 }

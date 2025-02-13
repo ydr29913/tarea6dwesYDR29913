@@ -10,5 +10,7 @@ import com.ydr29913.tarea6dwesYDR29913.modelo.Persona;
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, Long>{
 
+	Optional<Persona> findByNombre(String nombre);
+	
 	Optional<Persona> findByEmail(String email);
 }
