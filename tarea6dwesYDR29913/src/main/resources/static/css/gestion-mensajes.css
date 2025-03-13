@@ -181,3 +181,32 @@ button:hover {
     border-radius: 30px;
     border: 1px solid grey;
 }
+
+
+/* Menu Mensajes Seguimiento */
+#menu-mensajes-seguimiento2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 720px;
+    height: 100%;
+    margin-bottom: 70px;
+    border-radius: 30px;
+    background-color: #f8f7f7;
+    
+    border: 1px solid;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
+}
+
+#menu-mensajes-seguimiento2 {
+    text-decoration: none;
+    color: #333;
+}
+
+#menu-mensajes-seguimiento2 p {
+    margin-inline: 50px;
+    margin-top: 10px;
+    color: black;
+}

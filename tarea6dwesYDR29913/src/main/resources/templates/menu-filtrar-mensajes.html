@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar Mensajes</title>
+    <link rel="stylesheet" href="../css/menu-filtrar-mensajes.css">
+</head>
+<body>
+    <div id="navegacion">
+        <div id="navegacion-logo">
+            <img src="../imagenes/Logo.png" alt="Logo" width="90">
+        </div>
+        
+        <div id="navegacion-titulo">
+            <p>Filtrar Mensajes</p>
+        </div>
+
+        <ul id="navegacion-volver">
+            <li><a href="/mostrarIndex"><img src="../imagenes/volver.png" alt="Login" width="50"></a></li>
+        </ul>
+    </div>
+
+    <div id="">
+        <form id="filtrar-mensajes" action="/filtrarMensajes" method="post">
+            <h2>Filtrar Mensajes Por Persona</h2>
+
+            <label for="filtroEjemplar">Selecciona un Ejemplar para filtrar los Mensajes:</label>
+            <select name="filtroEjemplar" id="filtroEjemplar">
+                <option value="">Seleccione un ejemplar</option>
+                <option th:each="ejemplar : ${ejemplares}" th:value="${ejemplar.id}" th:text="${ejemplar.nombre}"></option>
+            </select>
+
+            <div id="form-botones">
+                <button type="submit">Filtrar Mensajes</button>
+            </div>
+
+			<div id="resultado">
+				<ul id="mensajes-lista">
+					<th:block th:each="mensaje : ${mensajes}">
+						<li th:text="${mensaje.mensaje}"></li>
+					</th:block>
+				</ul>
+			</div>
+		</form>
+		
+		
+		<form id="filtrar-mensajes" action="/filtrarMensajesPorFecha" method="post">
+            <h2>Filtrar Mensajes Por Rango Fechas</h2>
+
+    		<label for="fechaInicio">Fecha de Inicio (formato: dd/MM/yyyy):</label>
+    		<input type="text" name="fechaInicio" id="fechaInicio" placeholder="dd/MM/yyyy" required />
+
+    		<label for="fechaFin">Fecha de Fin (formato: dd/MM/yyyy):</label>
+    		<input type="text" name="fechaFin" id="fechaFin" placeholder="dd/MM/yyyy" required />
+			
+
+            <div id="form-botones">
+                <button type="submit">Filtrar Mensajes</button>
+            </div>
+
+			<div id="resultado">
+				<ul id="mensajes-lista">
+					<th:block th:each="mensaje : ${mensajes}">
+						<li th:text="${mensaje.mensaje}"></li>
+					</th:block>
+				</ul>
+			</div>
+		</form>
+		
+		
+		<form id="filtrar-mensajes" action="/filtrarMensajesPorPlanta" method="post">
+            <h2>Filtrar Mensajes Por Planta</h2>
+
+            <label for="filtroPlanta">Selecciona una Planta para filtrar los Mensajes:</label>
+            <select name="filtroPlanta" id="filtroEjemplar">
+                <option value="">Seleccione una planta</option>
+                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
+            </select>
+
+            <div id="form-botones">
+                <button type="submit">Filtrar Mensajes</button>
+            </div>
+
+			<div id="resultado">
+				<ul id="mensajes-lista">
+					<th:block th:each="mensaje : ${mensajes}">
+						<li th:text="${mensaje.mensaje}"></li>
+					</th:block>
+				</ul>
+			</div>
+		</form>
+	</div>
+    
+    
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

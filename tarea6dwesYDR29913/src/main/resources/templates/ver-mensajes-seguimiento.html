@@ -43,6 +43,28 @@
                 </tbody>
             </table>
         </div>
+        
+        <form id="filtrar-mensajes" action="/filtrarMensajes" method="post">
+            <h2>Filtrar Mensajes</h2>
+
+            <label for="filtroEjemplar">Selecciona un Ejemplar para filtrar los Mensajes:</label>
+            <select name="filtroEjemplar" id="filtroEjemplar">
+                <option value="">Seleccione un ejemplar</option>
+                <option th:each="ejemplar : ${ejemplares}" th:value="${ejemplar.id}" th:text="${ejemplar.nombre}"></option>
+            </select>
+
+            <div id="form-botones">
+                <button type="submit">Filtrar Mensajes</button>
+            </div>
+
+			<div id="resultado">
+				<ul id="mensajes-lista">
+					<th:block th:each="mensaje : ${mensajes}">
+						<li th:text="${mensaje.mensaje}"></li>
+					</th:block>
+				</ul>
+			</div>
+		</form>
     </div>
 
     <script src="/webjars/jquery/jquery.min.js"></script>

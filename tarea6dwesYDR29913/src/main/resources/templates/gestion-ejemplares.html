@@ -34,11 +34,11 @@
 		       	<option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
 		   	</select>
 		  	
-			<label for="nombre">Nombre Ejemplar:</label>
-		   	<input type="text" name="nombre" id="nombre" required>
+<!-- 			<label for="nombre">Nombre Ejemplar:</label> -->
+<!-- 		   	<input type="text" name="nombre" id="nombre"> -->
 		            
-			<label for="mensaje">Introduce un Mensaje:</label>
-		   	<input type="text" name="mensaje" id="mensaje" required>
+<!-- 			<label for="mensaje">Introduce un Mensaje:</label> -->
+<!-- 		   	<input type="text" name="mensaje" id="mensaje"> -->
 		            
 			<div id="form-botones">
 				<button type="submit">Registrar</button>
@@ -46,28 +46,28 @@
 			</div>
 		</form>
         
-		<form id="filtrar-ejemplares" action="/filtrarEjemplares" th:action="@{/filtrarEjemplares}" method="post">
-			<h2>Filtrar Ejemplares</h2>
+<!-- 		<form id="filtrar-ejemplares" action="/filtrarEjemplares" th:action="@{/filtrarEjemplares}" method="post"> -->
+<!-- 			<h2>Filtrar Ejemplares</h2> -->
 			
-            <label for="plantaFiltro">Selecciona una Planta para filtrar los Ejemplares:</label>
-            <select name="id" id="plantaFiltro" required>
-                <option value="" disabled selected>Seleccione una planta</option>
-                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
-            </select>
+<!--             <label for="plantaFiltro">Selecciona una Planta para filtrar los Ejemplares:</label> -->
+<!--             <select name="id" id="plantaFiltro" required> -->
+<!--                 <option value="" disabled selected>Seleccione una planta</option> -->
+<!--                 <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option> -->
+<!--             </select> -->
 			
-			<div id="form-botones">
-				<button type="submit">Filtrar Ejemplares</button>
-			</div>
+<!-- 			<div id="form-botones"> -->
+<!-- 				<button type="submit">Filtrar Ejemplares</button> -->
+<!-- 			</div> -->
 			
-			<div id="resultado">
-				<table>
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Planta Asociada</th>
-							<th>Mensaje</th>
-						</tr>
-					</thead>
+<!-- 			<div id="resultado"> -->
+<!-- 				<table> -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th>Nombre</th> -->
+<!-- 							<th>Planta Asociada</th> -->
+<!-- 							<th>Mensaje</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
 <!-- 					<tbody> -->
 <!-- 				      	<tr th:each="ejemplar : ${ejemplares}"> -->
 <!-- 				          	<td th:text="${ejemplar.nombre}"></td> -->
@@ -78,9 +78,71 @@
 <!-- 				        	<td colspan="3">No hay ejemplares registrados</td> -->
 <!-- 				       	</tr> -->
 <!-- 				  	</tbody> -->
-				</table>
+<!-- 				</table> -->
+<!-- 			</div> -->
+<!--         </form> -->
+
+		<form id="filtrar-ejemplares" action="/filtrarEjemplares" method="post">
+            <h2>Filtrar Ejemplares</h2>
+
+            <label for="plantaFiltro">Selecciona un Ejemplar para filtrar los Mensajes:</label>
+            <select name="id" id="plantaFiltro">
+                <option value="">Seleccione una Planta</option>
+                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
+            </select>
+
+            <div id="form-botones">
+                <button type="submit">Filtrar Ejemplares</button>
+            </div>
+
+			<div id="resultado">
+				<ul id="mensajes-lista">
+					<th:block th:each="ejemplar : ${ejemplares}">
+						<li th:text="${ejemplar.nombre}"></li>
+					</th:block>
+				</ul>
 			</div>
-        </form>
+		</form>
+
+<!-- 	<form id="filtrar-ejemplares" action="/filtrarEjemplares" th:action="@{/filtrarEjemplares}" method="post"> -->
+<!--     <h2>Filtrar Ejemplares</h2> -->
+    
+<!--     <label for="plantaFiltro">Selecciona una Planta para filtrar los Ejemplares:</label> -->
+<!--     <select name="id" id="plantaFiltro" required> -->
+<!--         <option value="" disabled selected>Seleccione una planta</option> -->
+<!--         <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option> -->
+<!--     </select> -->
+    
+<!--     <div id="form-botones"> -->
+<!--         <button type="submit">Filtrar Ejemplares</button> -->
+<!--     </div> -->
+<!-- </form> -->
+
+<!-- <div id="resultado"> -->
+<!--     <h3 th:if="${plantaSeleccionada != null}" th:text="'Ejemplares de ' + ${plantaSeleccionada.nombreComun}"></h3> -->
+    
+<!--     <p th:if="${error != null}" th:text="${error}" style="color: red;"></p> -->
+    
+<!--     <table th:if="${ejemplares != null}"> -->
+<!--         <thead> -->
+<!--             <tr> -->
+<!--                 <th>Nombre</th> -->
+<!--                 <th>Planta Asociada</th> -->
+<!--             </tr> -->
+<!--         </thead> -->
+<!--         <tbody> -->
+<!--             <tr th:each="ejemplar : ${ejemplares}"> -->
+<!--                 <td th:text="${ejemplar.nombre}"></td> -->
+<!--                 <td th:text="${ejemplar.planta.nombreComun}"></td> -->
+<!--             </tr> -->
+<!--             <tr th:if="${#lists.isEmpty(ejemplares)}"> -->
+<!--                 <td colspan="2">No hay ejemplares registrados</td> -->
+<!--             </tr> -->
+<!--         </tbody> -->
+<!--     </table> -->
+<!-- </div> -->
+
+
 
 		<div id="">
     		<a href="/mostrarMenuMensajesSeguimiento" id="menu-mensajes-seguimiento">
