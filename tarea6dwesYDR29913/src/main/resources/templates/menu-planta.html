@@ -62,9 +62,7 @@
     				<option value="">Seleccione una planta</option>
     				<option th:each="planta : ${plantas}" th:value="${planta.codigo}" th:text="${planta.codigo}"></option>
 				</select>
-<!-- 				<label for="codigo">Código de la Planta:</label> -->
-<!-- 				<input type="text" name="codigo" id="codigo" required> -->
-				
+							
 				<label for="nuevoNombreComun">Nuevo Nombre Común:</label>
 				<input type="text" name="nuevoNombreComun" id="nuevoNombreComun">
 

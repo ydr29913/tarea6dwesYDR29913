@@ -2,6 +2,7 @@ package com.ydr29913.tarea6dwesYDR29913.controlador;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -233,11 +234,9 @@ public class Controlador {
 	    //Pruebas
 	    if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
 	        System.out.println("Error: No hay un usuario autenticado.");
-	        //return;
 	    }
 
 	    Persona persona = usuarioAutenticado.getPersona();
-	    //List<Credenciales> credenciales = servcredenciales.obtenerCredencialesPorIdPersona(idPersona);
 	    
 	    
 	    long contadorEjemplares = servejemplar.ultimoIdEjemplarByPlanta(planta) + 1;
@@ -251,10 +250,7 @@ public class Controlador {
 	    Mensaje nuevoMensaje = new Mensaje();
 	    nuevoMensaje.setEjemplar(ejemplar);
 	    nuevoMensaje.setPlanta(planta);
-	    //nuevoMensaje.setPersona(idPersona);
-	    //nuevoMensaje.setPersona(persona);
 	    nuevoMensaje.setPersona(persona);
-	    //persona.setId(persona_id);
 	    nuevoMensaje.setMensaje("Añadido ejemplar " + nombreEjemplar);
 
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -270,67 +266,8 @@ public class Controlador {
 	    model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
 	    return "redirect:/mostrarGestionEjemplares";
 	}
-//	@PostMapping("/insertarEjemplar")
-//	public String insertarEjemplar(@RequestParam Long id, Long idPersona, Model model) {
-//	    Planta planta = servplanta.obtenerPlantaPorId(id);
-//	    if (planta == null) {
-//	        model.addAttribute("error", "Planta no encontrada.");
-//	        return "gestion-ejemplares";
-//	    }
-//
-//	    //Pruebas
-////	    if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
-////	        System.out.println("Error: No hay un usuario autenticado.");
-////	        //return;
-////	    }
-////
-////	    Persona persona = usuarioAutenticado.getPersona();
-//	    //List<Credenciales> credenciales = servcredenciales.obtenerCredencialesPorIdPersona(idPersona);
-//	    
-//	    
-//	    long contadorEjemplares = servejemplar.ultimoIdEjemplarByPlanta(planta) + 1;
-//	    String nombreEjemplar = planta.getNombreComun() + "-" + contadorEjemplares;
-//
-//	    Ejemplar ejemplar = new Ejemplar();
-//	    ejemplar.setNombre(nombreEjemplar);
-//	    ejemplar.setPlanta(planta);
-//	    servejemplar.insertarEjemplar(ejemplar);    
-//	    
-//	    Mensaje nuevoMensaje = new Mensaje();
-//	    nuevoMensaje.setEjemplar(ejemplar);
-//	    nuevoMensaje.setPlanta(planta);
-//	    //nuevoMensaje.setPersona(idPersona);
-//	    //nuevoMensaje.setPersona(persona);
-//	    nuevoMensaje.setMensaje("Añadido ejemplar " + nombreEjemplar);
-//
-//	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//	    try {
-//	        Date fecha = sdf.parse(sdf.format(new Date()));
-//	        nuevoMensaje.setFechaHora(fecha);
-//	    } catch (ParseException e) {
-//	        e.printStackTrace();
-//	    }
-//	    
-//	    servmensaje.insertarMensaje(nuevoMensaje);
-//
-//	    model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
-//	    return "redirect:/mostrarGestionEjemplares";
-//	}
+
 	
-	
-	//Metodo para filtrar los ejemplares registrados en la base de datos
-//	@PostMapping("/filtrarEjemplares")
-//    public String filtrarEjemplares(@RequestParam Long plantaId, Model model) {
-//        List<Ejemplar> ejemplares = servejemplar.obtenerEjemplaresPorPlanta(plantaId);
-//        List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
-//        List<Mensaje> mensajes = servmensaje.obtenerMensajesPorPlanta(plantaId);
-//        
-//        model.addAttribute("plantas", plantas);
-//        model.addAttribute("ejemplares", ejemplares);
-//        model.addAttribute("mensajes", mensajes);
-//        
-//        return "gestion-ejemplares";
-//    }
 	@PostMapping("/filtrarEjemplares")
 	public String filtrarEjemplares(@RequestParam("id") Long plantaId, Model model) {
 	    List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
@@ -348,9 +285,26 @@ public class Controlador {
 	    
 	    return "gestion-ejemplares";
 	}
-
 	
-	
+//	@PostMapping("/filtrarEjemplares")
+//	public String filtrarEjemplares(@RequestParam("id[]") List<Long> plantaIds, Model model) {
+//	    List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+//	    model.addAttribute("plantas", plantas);
+//
+//	    if (plantaIds == null || plantaIds.isEmpty()) {
+//	        model.addAttribute("error", "Debe seleccionar al menos una planta.");
+//	        model.addAttribute("ejemplares", null);
+//	    } else {
+//	        List<Ejemplar> ejemplaresFiltrados = new ArrayList<>();
+//	        for (Long plantaId : plantaIds) {
+//	            List<Ejemplar> ejemplares = servejemplar.obtenerEjemplaresPorPlanta(plantaId);
+//	            ejemplaresFiltrados.addAll(ejemplares);
+//	        }
+//	        model.addAttribute("ejemplares", ejemplaresFiltrados);
+//	    }
+//
+//	    return "gestion-ejemplares";
+//	}
 	
 	
 	//Metodo para mostrar la pagina de los mensajes de seguimiento
@@ -411,7 +365,6 @@ public class Controlador {
         //Prueba
         if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
 	        System.out.println("Error: No hay un usuario autenticado.");
-	        //return;
 	    }
 
 	    Persona persona = usuarioAutenticado.getPersona();
@@ -438,25 +391,6 @@ public class Controlador {
         model.addAttribute("mensajeExito", "Mensaje añadido correctamente.");
         return "redirect:/mostrarGestionMensajes";
     }
-	
-	//Metodo para filtrar los mensajes de el ejemplar seleccionado
-//	@PostMapping("/filtrarMensajes")
-//    public String filtrarMensajes(@RequestParam("filtroEjemplar") Long idEjemplar, Model model) {
-//        List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
-//        model.addAttribute("ejemplares", ejemplares);
-//        
-//        Ejemplar ejemplar = servejemplar.obtenerEjemplarPorId(idEjemplar);
-//        if (ejemplar == null) {
-//            model.addAttribute("error", "Ejemplar no encontrado.");
-//            model.addAttribute("mensajes", null);
-//        } else {
-//            List<Mensaje> mensajes = servmensaje.obtenerMensajesPorEjemplar(ejemplar);
-//            model.addAttribute("mensajes", mensajes);
-//            model.addAttribute("ejemplar", ejemplar);
-//        }
-//        
-//        return "gestion-mensajes";
-//    }
 	
 	
 	//Metodo para mostrar la pagina para filtrar los mensajes
