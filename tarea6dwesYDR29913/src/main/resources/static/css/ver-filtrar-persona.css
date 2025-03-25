@@ -36,6 +36,66 @@ body {
 }
 
 
+/*Main*/
+#opciones {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	
+    width: 700px;
+    height: auto;
+    padding: 20px;
+    margin-block: 80px;
+    overflow-x: auto;
+    border-radius: 30px;
+    background-color: #f8f7f7;
+    
+    border: 1px solid black;
+	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
+	
+}
+
+
+/* Estilos de la tabla */
+#opciones table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#opciones th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#opciones th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+#opciones td {
+    background-color: #ffffff;
+}
+
+#opciones tr:hover {
+    background-color: #f1f1f1;
+}
+
+#opciones td, th {
+    border-radius: 8px;
+}
+
+/* Añadir estilo cuando no hay plantas registradas */
+#opciones table .text-center {
+    color: #f44336;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+
 /*Filtar Mensajes*/
 #filtrar-mensajes {
     display: flex;
@@ -46,8 +106,8 @@ body {
     padding-inline: 30px;
     border-radius: 30px;
     width: 650px;
-    height: 500px;
-    margin-top: 100px;
+    height: auto;
+    margin-top: 60px;
 	margin-bottom: 100px;
     border: 1px solid;
 	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.6);
@@ -67,14 +127,6 @@ body {
     flex-direction: column;
     margin-bottom: 5px;
     font-weight: bold;
-}
-
-#filtrar-mensajes input {
-	width: 95%;
-    padding: 7px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid grey;
 }
 
 #filtrar-mensajes select {
@@ -112,32 +164,4 @@ body {
     margin-bottom: 20px;
     border-radius: 30px;
     border: 1px solid grey;
-}
-
-
-#menu-mensajes-seguimiento {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 720px;
-    height: 100%;
-    margin-bottom: 60px;
-    border-radius: 30px;
-    background-color: #f8f7f7;
-    
-    border: 1px solid;
-	box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.5);
-}
-
-#menu-mensajes-seguimiento {
-    text-decoration: none;
-    color: #333;
-}
-
-#menu-mensajes-seguimiento p {
-    margin-inline: 50px;
-    margin-top: 10px;
-    color: black;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ydr29913.tarea6dwesYDR29913.modelo.Ejemplar;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Mensaje;
+import com.ydr29913.tarea6dwesYDR29913.modelo.Persona;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Planta;
 import com.ydr29913.tarea6dwesYDR29913.repositorios.MensajeRepository;
 
@@ -32,6 +33,10 @@ public class ServiciosMensaje {
 	
 	public List<Mensaje> obtenerMensajesPorPlantaSeleccionada(Planta planta) {
         return mensajerepo.findByPlanta(planta);
+    }
+	
+	public List<Mensaje> obtenerMensajesPorPersonaSeleccionada(Persona persona) {
+        return mensajerepo.findByPersona(persona);
     }
 	
 	public List<Mensaje> obtenerMensajesPorEjemplar(Ejemplar ejemplar) {

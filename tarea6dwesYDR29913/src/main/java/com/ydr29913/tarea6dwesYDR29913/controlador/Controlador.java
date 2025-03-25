@@ -69,6 +69,7 @@ public class Controlador {
     public String login(@RequestParam String usuario, @RequestParam String contraseña, Model model) {
         Credenciales credenciales = servcredenciales.autenticarUsuario(usuario, contraseña);
         if (credenciales != null) {
+        	usuarioAutenticado = credenciales;
 			Persona persona = credenciales.getPersona();
 			
             if ("Admin".equals(credenciales.getPerfil())) {
@@ -114,22 +115,22 @@ public class Controlador {
         
 		if (!servpersona.validarNombre(nombre)) {
             model.addAttribute("errorNombre", "El nombre ya está registrado o es incorrecto.");
-            return "registrar-persona";
+            return "menu-persona";
         }
 		
 		if (!servpersona.validarEmail(correo)) {
             model.addAttribute("errorEmail", "El correo ya está registrado o es incorrecto.");
-            return "registrar-persona";
+            return "menu-persona";
         }
         
         if (!servcredenciales.validarUsuario(usuario)) {
             model.addAttribute("errorUsuario", "El nombre de usuario no está disponible.");
-            return "registrar-persona";
+            return "menu-persona";
         }
         
         if (!servcredenciales.validarPassword(contraseña)) {
             model.addAttribute("errorPassword", "La contraseña no es válida.");
-            return "registrar-persona";
+            return "menu-persona";
         }
 
         Persona persona = new Persona();
@@ -145,7 +146,7 @@ public class Controlador {
         servcredenciales.insertarCredenciales(credenciales);
 
         model.addAttribute("mensajeExito", "Persona registrada correctamente.");
-        return "redirect:/mostrarMenuAdmin";
+        return "redirect:/mostrarMenuPersona";
     }
 	
 	
@@ -163,7 +164,11 @@ public class Controlador {
 	public String insertarPlanta(@RequestParam String codigo, @RequestParam String nombreComun, @RequestParam String nombreCientifico, Model model) {
 	    if (servplanta.existePlantaPorCodigo(codigo)) {
 	        model.addAttribute("error", "Ya existe una planta con ese código.");
-	        return "menu-admin";
+	        return "menu-planta";
+	    }
+	    if (!servplanta.validarCodigo(codigo)) {
+	        model.addAttribute("error", "El código está introducido incorrectamente. No debe contener espacios.");
+	        return "menu-planta";
 	    }
 	    
 	    Planta nuevaPlanta = new Planta();
@@ -173,17 +178,20 @@ public class Controlador {
 	    servplanta.insertarPlanta(nuevaPlanta);
 	    
 	    model.addAttribute("mensajeExito", "Planta registrada correctamente.");
-	    return "redirect:/mostrarMenuAdmin";
+	    return "redirect:/mostrarMenuPlanta";
 	}
 	
 	
 	//Metodo para modificar una planta de la base de datos
 	@PostMapping("/modificarPlanta")
     public String modificarPlanta(@RequestParam String codigo, @RequestParam(required = false) String nuevoNombreComun, @RequestParam(required = false) String nuevoNombreCientifico, Model model) {
-        Planta planta = servplanta.obtenerPlantaPorCodigo(codigo);
+		List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+	    model.addAttribute("plantas", plantas);
+		
+		Planta planta = servplanta.obtenerPlantaPorCodigo(codigo);
         if (planta == null) {
             model.addAttribute("error", "No se encontró una planta con ese código.");
-            return "menu-admin";
+            return "menu-planta";
         }
         if (nuevoNombreComun != null && !nuevoNombreComun.trim().isEmpty()) {
             planta.setNombreComun(nuevoNombreComun);
@@ -194,7 +202,7 @@ public class Controlador {
         
         servplanta.modificarPlanta(planta);
         model.addAttribute("mensajeExito", "Planta modificada correctamente.");
-        return "redirect:/mostrarMenuAdmin";
+        return "redirect:/mostrarMenuPlanta";
     }
 	
 	
@@ -214,31 +222,8 @@ public class Controlador {
     }
 	
 	//Metodo para registrar un nuevo ejemplar en la base de datos
-//	@PostMapping("/insertarEjemplar")
-//    public String insertarEjemplar(@RequestParam Long id, @RequestParam String nombre, @RequestParam String mensaje, Model model) {
-//        Planta planta = servplanta.obtenerPlantaPorId(id);
-//        if (planta == null) {
-//            model.addAttribute("error", "Planta no encontrada.");
-//            return "gestion-ejemplares";
-//        }
-//        
-//        Ejemplar ejemplar = new Ejemplar();
-//        ejemplar.setNombre(nombre);
-//        ejemplar.setPlanta(planta);
-//        servejemplar.insertarEjemplar(ejemplar);
-//        
-//        //String nombreEjemplar = planta.getNombreComun() + "-" + contadorEjemplares;
-//        
-//        Mensaje nuevoMensaje = new Mensaje();
-//        nuevoMensaje.setEjemplar(ejemplar);
-//        nuevoMensaje.setMensaje("Ejemplar registrado con mensaje: " + mensaje);
-//        servmensaje.insertarMensaje(nuevoMensaje);
-//        
-//        model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
-//        return "redirect:/mostrarGestionEjemplares";
-//    }
 	@PostMapping("/insertarEjemplar")
-	public String insertarEjemplar(@RequestParam Long id, Long idPersona, Model model) {
+	public String insertarEjemplar(@RequestParam Long id, Long persona_id, Model model) {
 	    Planta planta = servplanta.obtenerPlantaPorId(id);
 	    if (planta == null) {
 	        model.addAttribute("error", "Planta no encontrada.");
@@ -246,17 +231,17 @@ public class Controlador {
 	    }
 
 	    //Pruebas
-//	    if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
-//	        System.out.println("Error: No hay un usuario autenticado.");
-//	        //return;
-//	    }
-//
-//	    Persona persona = usuarioAutenticado.getPersona();
+	    if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
+	        System.out.println("Error: No hay un usuario autenticado.");
+	        //return;
+	    }
+
+	    Persona persona = usuarioAutenticado.getPersona();
 	    //List<Credenciales> credenciales = servcredenciales.obtenerCredencialesPorIdPersona(idPersona);
 	    
 	    
 	    long contadorEjemplares = servejemplar.ultimoIdEjemplarByPlanta(planta) + 1;
-	    String nombreEjemplar = planta.getNombreComun() + "-" + contadorEjemplares;
+	    String nombreEjemplar = planta.getCodigo() + "-" + contadorEjemplares;
 
 	    Ejemplar ejemplar = new Ejemplar();
 	    ejemplar.setNombre(nombreEjemplar);
@@ -268,6 +253,8 @@ public class Controlador {
 	    nuevoMensaje.setPlanta(planta);
 	    //nuevoMensaje.setPersona(idPersona);
 	    //nuevoMensaje.setPersona(persona);
+	    nuevoMensaje.setPersona(persona);
+	    //persona.setId(persona_id);
 	    nuevoMensaje.setMensaje("Añadido ejemplar " + nombreEjemplar);
 
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -283,6 +270,52 @@ public class Controlador {
 	    model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
 	    return "redirect:/mostrarGestionEjemplares";
 	}
+//	@PostMapping("/insertarEjemplar")
+//	public String insertarEjemplar(@RequestParam Long id, Long idPersona, Model model) {
+//	    Planta planta = servplanta.obtenerPlantaPorId(id);
+//	    if (planta == null) {
+//	        model.addAttribute("error", "Planta no encontrada.");
+//	        return "gestion-ejemplares";
+//	    }
+//
+//	    //Pruebas
+////	    if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
+////	        System.out.println("Error: No hay un usuario autenticado.");
+////	        //return;
+////	    }
+////
+////	    Persona persona = usuarioAutenticado.getPersona();
+//	    //List<Credenciales> credenciales = servcredenciales.obtenerCredencialesPorIdPersona(idPersona);
+//	    
+//	    
+//	    long contadorEjemplares = servejemplar.ultimoIdEjemplarByPlanta(planta) + 1;
+//	    String nombreEjemplar = planta.getNombreComun() + "-" + contadorEjemplares;
+//
+//	    Ejemplar ejemplar = new Ejemplar();
+//	    ejemplar.setNombre(nombreEjemplar);
+//	    ejemplar.setPlanta(planta);
+//	    servejemplar.insertarEjemplar(ejemplar);    
+//	    
+//	    Mensaje nuevoMensaje = new Mensaje();
+//	    nuevoMensaje.setEjemplar(ejemplar);
+//	    nuevoMensaje.setPlanta(planta);
+//	    //nuevoMensaje.setPersona(idPersona);
+//	    //nuevoMensaje.setPersona(persona);
+//	    nuevoMensaje.setMensaje("Añadido ejemplar " + nombreEjemplar);
+//
+//	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//	    try {
+//	        Date fecha = sdf.parse(sdf.format(new Date()));
+//	        nuevoMensaje.setFechaHora(fecha);
+//	    } catch (ParseException e) {
+//	        e.printStackTrace();
+//	    }
+//	    
+//	    servmensaje.insertarMensaje(nuevoMensaje);
+//
+//	    model.addAttribute("mensajeExito", "Ejemplar registrado correctamente.");
+//	    return "redirect:/mostrarGestionEjemplares";
+//	}
 	
 	
 	//Metodo para filtrar los ejemplares registrados en la base de datos
@@ -374,6 +407,15 @@ public class Controlador {
             model.addAttribute("error", "El ejemplar seleccionado no existe.");
             return "gestion-mensajes";
         }
+       
+        //Prueba
+        if (usuarioAutenticado == null || usuarioAutenticado.getPersona() == null) {
+	        System.out.println("Error: No hay un usuario autenticado.");
+	        //return;
+	    }
+
+	    Persona persona = usuarioAutenticado.getPersona();
+       
         
         Planta planta = servejemplar.obtenerEjemplarPorId(ejemplarId).getPlanta();
         
@@ -381,6 +423,7 @@ public class Controlador {
         nuevoMensaje.setEjemplar(ejemplar);
         nuevoMensaje.setMensaje(mensaje);
         nuevoMensaje.setPlanta(planta);
+        nuevoMensaje.setPersona(persona);
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	    try {
@@ -428,6 +471,41 @@ public class Controlador {
 		return "menu-filtrar-mensajes";
 	}
 	
+	@GetMapping("/mostrarVerFiltrarPlanta")
+	public String mostrarVerFiltrarPlanta(Model model) {
+		List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+		model.addAttribute("plantas", plantas);
+		List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+	    model.addAttribute("ejemplares", ejemplares);
+	    List<Mensaje> mensajes = servmensaje.obtenerTodosLosMensajes();
+	    model.addAttribute("mensajes", mensajes);
+		return "ver-filtrar-planta";
+	}
+	
+	@GetMapping("/mostrarVerFiltrarFecha")
+	public String mostrarVerFiltrarFecha(Model model) {
+		List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+		model.addAttribute("plantas", plantas);
+		List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+	    model.addAttribute("ejemplares", ejemplares);
+	    List<Mensaje> mensajes = servmensaje.obtenerTodosLosMensajes();
+	    model.addAttribute("mensajes", mensajes);
+		return "ver-filtrar-fecha";
+	}
+	
+	@GetMapping("/mostrarVerFiltrarPersona")
+	public String mostrarVerFiltrarPersona(Model model) {
+		List<Planta> plantas = servplanta.obtenerPlantasOrdenadasAlfabeticamente();
+		model.addAttribute("plantas", plantas);
+		List<Ejemplar> ejemplares = servejemplar.obtenerTodosLosEjemplares();
+	    model.addAttribute("ejemplares", ejemplares);
+	    List<Persona> personas = servpersona.obtenerTodasPersonas();
+	    model.addAttribute("personas", personas);
+	    List<Mensaje> mensajes = servmensaje.obtenerTodosLosMensajes();
+	    model.addAttribute("mensajes", mensajes);
+		return "ver-filtrar-persona";
+	}
+	
 
 	@PostMapping("/filtrarMensajesPorFecha")
 	public String filtrarMensajesPorFecha(@RequestParam("fechaInicio") String fechaInicioStr, @RequestParam("fechaFin") String fechaFinStr, Model model) {
@@ -440,7 +518,7 @@ public class Controlador {
 	        fechaFin = sdf.parse(fechaFinStr);
 	    } catch (ParseException e) {
 	        model.addAttribute("error", "Formato de fecha inválido. Por favor, usa el formato dd/MM/yyyy.");
-	        return "menu-filtrar-mensajes";
+	        return "ver-filtrar-fecha";
 	    }
 
 	    List<Mensaje> mensajes = servmensaje.obtenerMensajesPorFecha(fechaInicio, fechaFin);
@@ -451,7 +529,7 @@ public class Controlador {
 	    } else {
 	        model.addAttribute("mensajes", mensajes);
 	    }
-	    return "menu-filtrar-mensajes";
+	    return "ver-filtrar-fecha";
 	}
 	
 	
@@ -470,6 +548,25 @@ public class Controlador {
 	        model.addAttribute("planta", planta);
 	    }
 
-	    return "menu-filtrar-mensajes";
+	    return "ver-filtrar-planta";
+	}
+	
+	
+	@PostMapping("/filtrarMensajesPorPersona")
+	public String filtrarMensajesPorPersona(@RequestParam("filtroPersona") Long persona_id, Model model) {
+	    List<Persona> personas = servpersona.obtenerTodasPersonas();
+	    model.addAttribute("personas", personas);
+
+	    Persona persona = servpersona.obtenerPersonaPorId(persona_id);
+	    if (persona == null) {
+	    	model.addAttribute("error", "Persona no encontrada");
+	    	model.addAttribute("mensajes", null);
+	    } else {
+	        List<Mensaje> mensajes = servmensaje.obtenerMensajesPorPersonaSeleccionada(persona);
+	        model.addAttribute("mensajes", mensajes);
+	        model.addAttribute("persona", persona);
+	    }
+
+	    return "ver-filtrar-persona";
 	}
 }

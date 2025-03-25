@@ -11,7 +11,7 @@
 <body>
     <div id="navegacion">
         <div id="navegacion-logo">
-            <img src="../imagenes/Logo.png" alt="Logo" width="90">
+            <a href="/mostrarIndex"><img src="../imagenes/Logo.png" alt="Logo" width="75"></a>
         </div>
         
         <div id="navegacion-titulo">
@@ -31,7 +31,7 @@
 			<label for="planta">Selecciona una Planta:</label>
 		   	<select name="id" id="planta" required>
 		   		<option value="" disabled selected>Seleccione una planta</option>
-		       	<option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
+		       	<option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.codigo}"></option>
 		   	</select>
 		  	
 <!-- 			<label for="nombre">Nombre Ejemplar:</label> -->
@@ -88,7 +88,7 @@
             <label for="plantaFiltro">Selecciona un Ejemplar para filtrar los Mensajes:</label>
             <select name="id" id="plantaFiltro">
                 <option value="">Seleccione una Planta</option>
-                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.nombreComun}"></option>
+                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.codigo}"></option>
             </select>
 
             <div id="form-botones">

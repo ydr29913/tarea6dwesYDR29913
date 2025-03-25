@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ydr29913.tarea6dwesYDR29913.modelo.Ejemplar;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Mensaje;
+import com.ydr29913.tarea6dwesYDR29913.modelo.Persona;
 import com.ydr29913.tarea6dwesYDR29913.modelo.Planta;
 
 @Repository
@@ -18,6 +19,8 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long>{
 	List<Mensaje> findByEjemplar_Planta_Id(Long plantaId);
 	
 	List<Mensaje> findByPlanta(Planta planta);
+	
+	List<Mensaje> findByPersona(Persona persona);
 	
 	List<Mensaje> findByEjemplar(Ejemplar ejemplar);
 	
