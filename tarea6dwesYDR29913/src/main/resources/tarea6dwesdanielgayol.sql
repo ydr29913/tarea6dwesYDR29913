@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2025 a las 14:19:43
+-- Tiempo de generación: 25-03-2025 a las 14:14:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,10 +44,8 @@ CREATE TABLE `credenciales` (
 
 INSERT INTO `credenciales` (`id`, `password`, `usuario`, `perfil`, `persona_id`) VALUES
 (1, 'admin', 'admin', 'Admin', 1),
-(2, 'jose', 'jose', 'Personal', 2),
-(3, 'marcos', 'marcos', 'Personal', 3),
-(4, 'personal', 'personal', 'Personal', 4),
-(15, 'prueba', 'prueba', 'Personal', 12);
+(19, 'dani', 'dani', 'Personal', 16),
+(23, 'prueba', 'prueba', 'Personal', 20);
 
 -- --------------------------------------------------------
 
@@ -67,21 +65,12 @@ CREATE TABLE `ejemplares` (
 --
 
 INSERT INTO `ejemplares` (`id`, `id_planta`, `nombre`) VALUES
-(1, 1, 'Rosa-1'),
-(2, 1, 'Rosa-2'),
-(3, 1, 'Rosa-3'),
-(4, 1, 'Rosa-4'),
-(5, 4, 'Girasol-1'),
-(6, 4, 'Girasol-2'),
-(7, 5, 'Hortensia-1'),
-(8, 5, 'Hortensia-2'),
-(9, 2, 'Margarita-1'),
-(10, 2, 'Margarita-2'),
-(11, 6, 'Tulipan-1'),
-(12, 6, 'Tulipan-2'),
-(13, 3, 'Violeta-1'),
-(14, 3, 'Violeta-2'),
-(23, 3, 'Violeta-3');
+(34, 18, 'rosa-1'),
+(35, 18, 'rosa-2'),
+(36, 23, 'violeta-1'),
+(37, 23, 'violeta-2'),
+(38, 18, 'rosa-3'),
+(39, 23, 'violeta-3');
 
 -- --------------------------------------------------------
 
@@ -104,19 +93,14 @@ CREATE TABLE `mensajes` (
 --
 
 INSERT INTO `mensajes` (`fecha_hora`, `id`, `id_ejemplar`, `id_persona`, `mensaje`, `id_planta`) VALUES
-('2025-03-11', 1, 4, 1, 'Añadido ejemplar Rosa-4', 1),
-('2025-03-11', 2, 5, 1, 'Añadido ejemplar Girasol-1', 4),
-('2025-03-11', 3, 6, 2, 'Añadido ejemplar Girasol-2', 4),
-('2025-03-11', 4, 7, 1, 'Añadida ejemplar Hortensia-1', 5),
-('2025-03-11', 5, 8, 4, 'Añadida ejemplar Hortensia-2', 5),
-('2025-03-11', 6, 9, 1, 'Añadida ejemplar Margarita-1', 2),
-('2025-03-11', 7, 10, 3, 'Añadida ejemplar Margarita-2', 2),
-('2025-03-11', 8, 11, 1, 'Añadido ejemplar Tulipan-1', 6),
-('2025-03-11', 9, 12, 3, 'Añadido ejemplar Tulipan-2', 6),
-('2025-03-11', 10, 13, 1, 'Añadida ejemplar Violeta-1', 3),
-('2025-03-11', 11, 14, 4, 'Añadida ejemplar Violeta-2', 3),
-('2025-03-12', 21, 1, 1, 'Añadido ejemplar Rosa-1', 1),
-('2025-03-12', 28, 23, NULL, 'Añadido ejemplar Violeta-3', 3);
+('2025-03-25', 45, 34, 1, 'Añadido ejemplar rosa-1', 18),
+('2025-03-25', 46, 35, 1, 'Añadido ejemplar rosa-2', 18),
+('2025-03-25', 47, 36, 1, 'Añadido ejemplar violeta-1', 23),
+('2025-03-25', 48, 37, 1, 'Añadido ejemplar violeta-2', 23),
+('2025-03-25', 49, 34, 1, 'Añadido Mensaje de Admin', 18),
+('2025-03-25', 50, 38, 16, 'Añadido ejemplar rosa-3', 18),
+('2025-03-25', 51, 39, 16, 'Añadido ejemplar violeta-3', 23),
+('2025-03-25', 52, 38, 16, 'Añadido Mensaje de Dani', 18);
 
 -- --------------------------------------------------------
 
@@ -136,11 +120,9 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`id`, `email`, `nombre`) VALUES
-(1, 'dani@gmail.com', 'Dani'),
-(2, 'jose@gmail.com', 'Jose'),
-(3, 'marcos@gmail.com', 'Marcos'),
-(4, 'personal@gmail.com', 'personal'),
-(12, 'prueba@gmail.com', 'Prueba');
+(1, 'admin@gmail.com', 'Admin'),
+(16, 'dani@gmail.com', 'Dani'),
+(20, 'prueba@gmail.com', 'Prueba');
 
 -- --------------------------------------------------------
 
@@ -161,12 +143,8 @@ CREATE TABLE `plantas` (
 --
 
 INSERT INTO `plantas` (`id`, `codigo`, `nombre_cientifico`, `nombre_comun`) VALUES
-(1, '01', 'rosa-rosa', 'Rosa'),
-(2, '02', 'margarita-margarita', 'Margarita'),
-(3, '03', 'violeta-violeta', 'Violeta'),
-(4, '04', 'girasol-girasol', 'Girasol'),
-(5, '05', 'hortensia-hortensia', 'Hortensia'),
-(6, '06', 'tulipan-tulipan', 'Tulipan');
+(18, 'rosa', 'Rosa-Cientifico', 'Rosa-Comun'),
+(23, 'violeta', 'Violeta_Cientifico', 'Violeta-Comun');
 
 --
 -- Índices para tablas volcadas
@@ -216,31 +194,31 @@ ALTER TABLE `plantas`
 -- AUTO_INCREMENT de la tabla `credenciales`
 --
 ALTER TABLE `credenciales`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `ejemplares`
 --
 ALTER TABLE `ejemplares`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `plantas`
 --
 ALTER TABLE `plantas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas
