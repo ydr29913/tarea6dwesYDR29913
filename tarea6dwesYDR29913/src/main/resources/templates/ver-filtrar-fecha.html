@@ -22,27 +22,62 @@
     </div>
 
     <div id="">        
-        <form id="filtrar-mensajes" action="/filtrarMensajesPorFecha" method="post">
-            <h2>Filtrar Mensajes Por Rango Fechas</h2>
+<!--        <form id="filtrar-mensajes" action="/filtrarMensajesPorFecha" method="post">-->
+<!--            <h2>Filtrar Mensajes Por Rango Fechas</h2>-->
 
-    		<label for="fechaInicio">Fecha de Inicio (formato: dd/MM/yyyy):</label>
-    		<input type="text" name="fechaInicio" id="fechaInicio" placeholder="dd/MM/yyyy" required />
+<!--    		<label for="fechaInicio">Fecha de Inicio (formato: dd/MM/yyyy):</label>-->
+<!--    		<input type="text" name="fechaInicio" id="fechaInicio" placeholder="dd/MM/yyyy" required />-->
 
-    		<label for="fechaFin">Fecha de Fin (formato: dd/MM/yyyy):</label>
-    		<input type="text" name="fechaFin" id="fechaFin" placeholder="dd/MM/yyyy" required />
+<!--    		<label for="fechaFin">Fecha de Fin (formato: dd/MM/yyyy):</label>-->
+<!--    		<input type="text" name="fechaFin" id="fechaFin" placeholder="dd/MM/yyyy" required />-->
 			
 
-            <div id="form-botones">
-                <button type="submit">Filtrar Mensajes</button>
-            </div>
+<!--            <div id="form-botones">-->
+<!--                <button type="submit">Filtrar Mensajes</button>-->
+<!--            </div>-->
 
-			<div id="resultado">
-				<ul id="mensajes-lista">
-					<th:block th:each="mensaje : ${mensajes}">
-						<li th:text="${mensaje.mensaje}"></li>
-					</th:block>
-				</ul>
-			</div>
+<!--			<div id="resultado">-->
+<!--				<ul id="mensajes-lista">-->
+<!--					<th:block th:each="mensaje : ${mensajes}">-->
+<!--						<li th:text="${mensaje.mensaje}"></li>-->
+<!--					</th:block>-->
+<!--				</ul>-->
+<!--			</div>-->
+<!--		</form>-->
+		<form id="filtrar-mensajes" action="/filtrarMensajesPorFecha" method="post">
+		    <h2>Filtrar Mensajes Por Rango de Fechas</h2>
+		
+		    <label for="fechaInicio">Fecha de Inicio (formato: dd/MM/yyyy):</label>
+		    <input type="text" name="fechaInicio" id="fechaInicio" placeholder="dd/MM/yyyy" required />
+		
+		    <label for="fechaFin">Fecha de Fin (formato: dd/MM/yyyy):</label>
+		    <input type="text" name="fechaFin" id="fechaFin" placeholder="dd/MM/yyyy" required />
+		
+		    <div id="form-botones">
+		        <button type="submit">Filtrar Mensajes</button>
+		    </div>
+		
+		    <div id="resultado">
+		        <table class="table table-striped">
+		            <thead>
+		                <tr>
+		                    <th>Usuario</th>
+		                    <th>Fecha</th>
+		                    <th>Mensaje</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr th:each="mensaje : ${mensajes}">
+		                    <td th:text="${mensaje.persona.getNombre()}"></td>
+		                    <td th:text="${mensaje.fechaHora}"></td>
+		                    <td th:text="${mensaje.mensaje}"></td>    
+		                </tr>
+		                <tr th:if="${#lists.isEmpty(mensajes)}">
+		                    <td colspan="3" class="text-center">No hay mensajes disponibles</td>
+		                </tr>
+		            </tbody>
+		        </table>
+		    </div>
 		</form>
     </div>
 

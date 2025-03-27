@@ -22,26 +22,61 @@
     </div>
 
     <div id="">        
-        <form id="filtrar-mensajes" action="/filtrarMensajesPorPersona" method="post">
-            <h2>Filtrar Mensajes Por Persona</h2>
+<!--        <form id="filtrar-mensajes" action="/filtrarMensajesPorPersona" method="post">-->
+<!--            <h2>Filtrar Mensajes Por Persona</h2>-->
 
-            <label for="filtroPersona">Selecciona una Persona para filtrar los Mensajes:</label>
-            <select name="filtroPersona" id="filtroPersona">
-                <option value="">Seleccione una persona</option>
-                <option th:each="persona : ${personas}" th:value="${persona.id}" th:text="${persona.nombre}"></option>
-            </select>
+<!--            <label for="filtroPersona">Selecciona una Persona para filtrar los Mensajes:</label>-->
+<!--            <select name="filtroPersona" id="filtroPersona">-->
+<!--                <option value="">Seleccione una persona</option>-->
+<!--                <option th:each="persona : ${personas}" th:value="${persona.id}" th:text="${persona.nombre}"></option>-->
+<!--            </select>-->
 
-            <div id="form-botones">
-                <button type="submit">Filtrar Mensajes</button>
-            </div>
+<!--            <div id="form-botones">-->
+<!--                <button type="submit">Filtrar Mensajes</button>-->
+<!--            </div>-->
 
-			<div id="resultado">
-				<ul id="mensajes-lista">
-					<th:block th:each="mensaje : ${mensajes}">
-						<li th:text="${mensaje.mensaje}"></li>
-					</th:block>
-				</ul>
-			</div>
+<!--			<div id="resultado">-->
+<!--				<ul id="mensajes-lista">-->
+<!--					<th:block th:each="mensaje : ${mensajes}">-->
+<!--						<li th:text="${mensaje.mensaje}"></li>-->
+<!--					</th:block>-->
+<!--				</ul>-->
+<!--			</div>-->
+<!--		</form>-->
+		<form id="filtrar-mensajes" action="/filtrarMensajesPorPersona" method="post">
+		    <h2>Filtrar Mensajes</h2>
+		
+		    <label for="filtroPersona">Selecciona una Persona para filtrar los Mensajes:</label>
+		    <select name="filtroPersona" id="filtroPersona">
+		        <option value="">Seleccione una persona</option>
+		        <option th:each="persona : ${personas}" th:value="${persona.id}" th:text="${persona.nombre}"></option>
+		    </select>
+		
+		    <div id="form-botones">
+		        <button type="submit">Filtrar Mensajes</button>
+		    </div>
+		
+		    <div id="resultado">
+		        <table class="table table-striped">
+		            <thead>
+		                <tr>
+		                    <th>Usuario</th>
+		                    <th>Fecha</th>
+		                    <th>Mensaje</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr th:each="mensaje : ${mensajes}">
+		                    <td th:text="${mensaje.persona.getNombre()}"></td>
+		                    <td th:text="${mensaje.fechaHora}"></td>
+		                    <td th:text="${mensaje.mensaje}"></td>    
+		                </tr>
+		                <tr th:if="${#lists.isEmpty(mensajes)}">
+		                    <td colspan="3" class="text-center">No hay mensajes disponibles</td>
+		                </tr>
+		            </tbody>
+		        </table>
+		    </div>
 		</form>
     </div>
 

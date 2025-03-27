@@ -22,26 +22,61 @@
     </div>
 
     <div id="">        
-        <form id="filtrar-mensajes" action="/filtrarMensajesPorPlanta" method="post">
-            <h2>Filtrar Mensajes Por Planta</h2>
+<!--        <form id="filtrar-mensajes" action="/filtrarMensajesPorPlanta" method="post">-->
+<!--            <h2>Filtrar Mensajes Por Planta</h2>-->
 
-            <label for="filtroPlanta">Selecciona una Planta para filtrar los Mensajes:</label>
-            <select name="filtroPlanta" id="filtroEjemplar">
-                <option value="">Seleccione una planta</option>
-                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.codigo}"></option>
-            </select>
+<!--            <label for="filtroPlanta">Selecciona una Planta para filtrar los Mensajes:</label>-->
+<!--            <select name="filtroPlanta" id="filtroEjemplar">-->
+<!--                <option value="">Seleccione una planta</option>-->
+<!--                <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.codigo}"></option>-->
+<!--            </select>-->
 
-            <div id="form-botones">
-                <button type="submit">Filtrar Mensajes</button>
-            </div>
+<!--            <div id="form-botones">-->
+<!--                <button type="submit">Filtrar Mensajes</button>-->
+<!--            </div>-->
 
-			<div id="resultado">
-				<ul id="mensajes-lista">
-					<th:block th:each="mensaje : ${mensajes}">
-						<li th:text="${mensaje.mensaje}"></li>
-					</th:block>
-				</ul>
-			</div>
+<!--			<div id="resultado">-->
+<!--				<ul id="mensajes-lista">-->
+<!--					<th:block th:each="mensaje : ${mensajes}">-->
+<!--						<li th:text="${mensaje.mensaje}"></li>-->
+<!--					</th:block>-->
+<!--				</ul>-->
+<!--			</div>-->
+<!--		</form>-->
+		<form id="filtrar-mensajes" action="/filtrarMensajesPorPlanta" method="post">
+		    <h2>Filtrar Mensajes Por Planta</h2>
+		
+		    <label for="filtroPlanta">Selecciona una Planta para filtrar los Mensajes:</label>
+		    <select name="filtroPlanta" id="filtroPlanta">
+		        <option value="">Seleccione una planta</option>
+		        <option th:each="planta : ${plantas}" th:value="${planta.id}" th:text="${planta.codigo}"></option>
+		    </select>
+		
+		    <div id="form-botones">
+		        <button type="submit">Filtrar Mensajes</button>
+		    </div>
+		
+		    <div id="resultado">
+		        <table class="table table-striped">
+		            <thead>
+		                <tr>
+		                    <th>Usuario</th>
+		                    <th>Fecha</th>
+		                    <th>Mensaje</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr th:each="mensaje : ${mensajes}">
+		                    <td th:text="${mensaje.persona.getNombre()}"></td>
+		                    <td th:text="${mensaje.fechaHora}"></td>
+		                    <td th:text="${mensaje.mensaje}"></td>    
+		                </tr>
+		                <tr th:if="${#lists.isEmpty(mensajes)}">
+		                    <td colspan="3" class="text-center">No hay mensajes disponibles</td>
+		                </tr>
+		            </tbody>
+		        </table>
+		    </div>
 		</form>
     </div>
 
